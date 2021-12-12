@@ -53,12 +53,12 @@ def main():
     word = SEARCH_WORD.replace("　", " ").replace(" ", "_")
     image_path = os.path.join(PATH, word)
     pathlib.Path(image_path).mkdir()
-    image_path = os.path.join(image_path, word+"_")
     for i, img_url in enumerate(img_urls, 1):
         res = requests.get(img_url, stream=True)
-        with open(image_path+str(i)+".jpg", "wb") as file:
+        filename = word+"_"+str(i)+".jpg"
+        with open(os.path.join(image_path, filename), "wb") as file:
             shutil.copyfileobj(res.raw, file)
-        print("画像"+str(i)+": 完了")
+        print("画像"+str(i)+": "+filename)
         sleep(SLEEP_BETWEEN_INTERACTIONS)
     print("画像ダウンロード: 完了-----------------------------------------------------------------------------")
 
