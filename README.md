@@ -1,0 +1,2 @@
+# image_scraper
+Google画像検索のスクレイピングを行うツール
