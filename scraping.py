@@ -41,10 +41,13 @@ def main():
             break
         thumbnail.click()
         sleep(SLEEP_BETWEEN_INTERACTIONS)
-        img_url = driver.find_elements_by_class_name(
-            "n3VNCb")[-2].get_attribute("src")
-        print("画像"+str(i)+": "+img_url)
-        img_urls.append(img_url)
+        candidates = driver.find_elements_by_class_name("n3VNCb")
+        for candidate in candidates:
+            img_url = candidate.get_attribute("src")
+            if re.match("https", img_url):
+                img_urls.append(img_url)
+                print("画像"+str(i)+": "+img_url)
+                break
     driver.close()
     print("画像URL取得: 完了----------------------------------------------------------------------------------", end="\n\n")
 
