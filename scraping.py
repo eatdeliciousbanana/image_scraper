@@ -39,7 +39,7 @@ def main():
     for i, thumbnail in enumerate(thumbnails, 1):
         if i > IMG_NUM:
             break
-        thumbnail.click()
+        driver.execute_script('arguments[0].click();', thumbnail)
         sleep(SLEEP_BETWEEN_INTERACTIONS)
         candidates = driver.find_elements_by_class_name("n3VNCb")
         for candidate in candidates:
