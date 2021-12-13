@@ -36,17 +36,19 @@ def main():
     # 画像のサムネイルをひとつずつクリックして画像のURLを取得
     print("画像URL取得: 開始----------------------------------------------------------------------------------")
     img_urls = []
-    for i, thumbnail in enumerate(thumbnails, 1):
-        if i > IMG_NUM:
+    count = 1
+    for thumbnail in thumbnails:
+        if count > IMG_NUM:
             break
         driver.execute_script('arguments[0].click();', thumbnail)
         sleep(SLEEP_BETWEEN_INTERACTIONS)
         candidates = driver.find_elements_by_class_name("n3VNCb")
         for candidate in candidates:
             img_url = candidate.get_attribute("src")
-            if re.match("https", img_url):
+            if re.search("^https", img_url) and re.search(".jpg$", img_url):
                 img_urls.append(img_url)
-                print("画像"+str(i)+": "+img_url)
+                print("画像"+str(count)+": "+img_url)
+                count += 1
                 break
     driver.close()
     print("画像URL取得: 完了----------------------------------------------------------------------------------", end="\n\n")
