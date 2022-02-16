@@ -94,6 +94,7 @@ def main():
         print("画像"+str(i)+": "+filename)
         sleep(SLEEP_BETWEEN_INTERACTIONS)
     print("画像ダウンロード: 完了-----------------------------------------------------------------------------")
+    input("エンターキーを押して終了")
 
 
 # main関数呼び出し
